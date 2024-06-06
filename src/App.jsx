@@ -39,11 +39,11 @@ function App() {
     if (!formData.location) return toast.error("Please select a location");
     setLoading(true);
     try {
-      const response = await fetch(import.meta.env.CHAT_GPT_API, {
+      const response = await fetch(import.meta.env.VITE_CHAT_GPT_API, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${import.meta.env.GPT_API_KEY}`,
+          Authorization: `Bearer ${import.meta.env.VITE_GPT_API_KEY}`,
         },
         body: JSON.stringify({
           model: "gpt-3.5-turbo",
@@ -131,7 +131,7 @@ function App() {
                   <h2 className="font-semibold">Location</h2>
                 </div>
                 <Autocomplete
-                  apiKey={import.meta.env.APIKEY}
+                  apiKey={import.meta.env.VITE_APIKEY}
                   onPlaceSelected={(place) =>
                     handleChange("location", place.formatted_address)
                   }
