@@ -137,7 +137,6 @@ function App() {
                 </div>
                 <Autocomplete
                   apiKey={import.meta.env.VITE_APIKEY}
-                  // apiKey={"AIzaSyALnapm0Iy2HEUjkcQLYjMUI6d7fWEt84k"}
                   onPlaceSelected={(place) =>
                     handleChange("location", place.formatted_address)
                   }
