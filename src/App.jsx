@@ -12,8 +12,8 @@ import Footer from "./components/Footer";
 function App() {
   const [formData, setFromData] = useState({
     location: "",
-    days: "1",
-    guests: "1",
+    days: 1,
+    guests: 1,
   });
   const [trip, setTrip] = useState("");
   const [loading, setLoading] = useState(false);
@@ -70,7 +70,12 @@ function App() {
   }
 
   function handleChange(key, value) {
-    setFromData({ ...formData, [key]: value });
+    if (value >= 0 && (key === "days" || key === "guests")) {
+      setFromData({ ...formData, [key]: value });
+    }
+    if (key === "location") {
+      setFromData({ ...formData, [key]: value });
+    }
   }
 
   const loadingTexts = [
@@ -132,6 +137,7 @@ function App() {
                 </div>
                 <Autocomplete
                   apiKey={import.meta.env.VITE_APIKEY}
+                  // apiKey={"AIzaSyALnapm0Iy2HEUjkcQLYjMUI6d7fWEt84k"}
                   onPlaceSelected={(place) =>
                     handleChange("location", place.formatted_address)
                   }
@@ -151,6 +157,7 @@ function App() {
                 <Input
                   type="number"
                   placeholder="1"
+                  value={formData.days}
                   onChange={(event) => handleChange("days", event.target.value)}
                 />
               </div>
@@ -167,6 +174,7 @@ function App() {
                   <Input
                     type="number"
                     placeholder="1"
+                    value={formData.guests}
                     onChange={(event) =>
                       handleChange("guests", event.target.value)
                     }
